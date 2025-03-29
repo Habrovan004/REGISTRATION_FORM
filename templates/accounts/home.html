@@ -1,0 +1,109 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f7fa; display: flex; min-height: 100vh;">
+    <!-- Right Side Navbar with Purple Border -->
+    <nav style="width: 250px; background: linear-gradient(135deg, #4b6cb7, #182848); color: white; padding: 30px 20px; position: fixed; right: 0; top: 0; bottom: 0; box-shadow: -2px 0 10px rgba(0,0,0,0.1); border-left: 5px solid #9b59b6;">
+        <div style="display: flex; flex-direction: column; height: 100%; border: 2px solid #3498db; padding: 15px; border-radius: 5px;">
+            <div style="text-align: center; margin-bottom: 40px; border-bottom: 2px solid #e74c3c; padding-bottom: 20px;">
+                <h2 style="margin: 0; font-weight: 600;">HABROVAN</h2>
+                <p style="opacity: 0.8; font-size: 14px; margin-top: 5px;">Seamless User Experiences</p>
+            </div>
+            
+            <div style="flex-grow: 1; border: 2px dashed #f1c40f; padding: 10px; border-radius: 5px;">
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">
+                        <a href="/" style="color: white; text-decoration: none; display: flex; align-items: center; padding: 10px; border-radius: 5px; transition: all 0.3s; border-left: 3px solid #2ecc71;">
+                            <span style="margin-left: 10px;">Home</span>
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">
+                        <a href="#" style="color: white; text-decoration: none; display: flex; align-items: center; padding: 10px; border-radius: 5px; transition: all 0.3s; border-left: 3px solid #e67e22;">
+                            <span style="margin-left: 10px;">Features</span>
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">
+                        <a href="#" style="color: white; text-decoration: none; display: flex; align-items: center; padding: 10px; border-radius: 5px; transition: all 0.3s; border-left: 3px solid #3498db;">
+                            <span style="margin-left: 10px;">Dashboard</span>
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 15px;">
+                        <a href="#" style="color: white; text-decoration: none; display: flex; align-items: center; padding: 10px; border-radius: 5px; transition: all 0.3s; border-left: 3px solid #d35400;">
+                            <span style="margin-left: 10px;">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div style="margin-top: auto; padding-top: 20px; border-top: 2px solid #c0392b;">
+                {% if not user.is_authenticated %}
+                <a href="{% url 'login' %}" style="display: block; text-align: center; background-color: rgba(255,255,255,0.1); color: white; padding: 10px; border-radius: 5px; text-decoration: none; transition: all 0.3s; margin-bottom: 10px; border: 1px solid #f39c12;">
+                    Login
+                </a>
+                {% else %}
+                <a href="{% url 'logout' %}" style="display: block; text-align: center; background-color: rgba(255,255,255,0.1); color: white; padding: 10px; border-radius: 5px; text-decoration: none; transition: all 0.3s; margin-bottom: 10px; border: 1px solid #f39c12;">
+                    Logout
+                </a>
+                {% endif %}
+                <p style="font-size: 12px; opacity: 0.7; text-align: center; margin-top: 20px; border-top: 1px dotted #7f8c8d; padding-top: 10px;">
+                    &copy; 2023 HABROVAN. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div style="flex-grow: 1; padding-right: 270px; display: flex; justify-content: center; align-items: center; border-right: 3px solid #16a085;">
+        <div style="max-width: 800px; width: 100%; background-color: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin: 20px; border: 3px solid #8e44ad;">
+            <!-- Hero Section -->
+            <div style="text-align: center; padding: 40px 20px; border-bottom: 2px solid #e74c3c; margin-bottom: 30px;">
+                <h1 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 20px; font-weight: 700;">Welcome to HABROVAN</h1>
+                <p style="font-size: 1.25rem; color: #7f8c8d; margin-bottom: 30px;">Your platform for seamless user experiences.</p>
+                
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'signup' %}" 
+                       style="display: inline-block; padding: 12px 30px; background-color: #4CAF50; color: white; 
+                              text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 1.1rem;
+                              transition: all 0.3s; border: 2px solid #27ae60;"
+                       onmouseover="this.style.backgroundColor='#3e8e41'; this.style.borderColor='#2ecc71'" 
+                       onmouseout="this.style.backgroundColor='#4CAF50'; this.style.borderColor='#27ae60'">
+                        Get Started
+                    </a>
+                {% else %}
+                    <div style="background-color: #e8f5e9; padding: 15px; border-radius: 6px; display: inline-block; border: 1px solid #2ecc71;">
+                        <p style="margin: 0; color: #27ae60; font-size: 1.1rem;">
+                            Hello, <strong style="color: #2c3e50;">{{ user.username }}</strong>! You're already logged in.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Features Section -->
+            <div style="margin-top: 40px; border: 2px solid #3498db; padding: 25px; border-radius: 8px;">
+                <h2 style="color: #2c3e50; border-bottom: 1px solid #bdc3c7; padding-bottom: 10px; margin-bottom: 20px;">Key Features</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="border: 1px solid #1abc9c; padding: 20px; border-radius: 6px;">
+                        <h3 style="color: #16a085; margin-top: 0;">Secure Authentication</h3>
+                        <p style="color: #7f8c8d;">Advanced security features to protect your account and data.</p>
+                    </div>
+                    <div style="border: 1px solid #3498db; padding: 20px; border-radius: 6px;">
+                        <h3 style="color: #2980b9; margin-top: 0;">User Dashboard</h3>
+                        <p style="color: #7f8c8d;">Personalized dashboard to manage your account and preferences.</p>
+                    </div>
+                    <div style="border: 1px solid #9b59b6; padding: 20px; border-radius: 6px;">
+                        <h3 style="color: #8e44ad; margin-top: 0;">Seamless Integration</h3>
+                        <p style="color: #7f8c8d;">Connect with other services and platforms effortlessly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
