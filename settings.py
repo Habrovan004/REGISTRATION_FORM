@@ -1,5 +1,8 @@
 # Define DEBUG variable
-DEBUG = True  # Set to False in production
+from decouple import config  # Ensure this is imported for environment variable management
+import dj_database_url  # Ensure this is imported for database configuration
+
+DEBUG = config('DEBUG', default='False') == 'True'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Replace with your email provider's SMTP server
@@ -49,7 +52,23 @@ CSRF_COOKIE_SECURE = True       # Use secure cookies for CSRF tokens
 import os
 from django.core.management.utils import get_random_secret_key
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'your-very-strong-and-random-secret-key')  # Replace with a secure key
-from decouple import config
-
 SECRET_KEY = config('SECRET_KEY', default='your-very-strong-and-random-secret-key')
+
+# Ensure BASE_DIR is defined for STATIC_ROOT
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Configure for Render
+ALLOWED_HOSTS = ['*']  # Or your specific domain
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# DATABASES configuration using dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(default=config('DATABASE_URL'))
+}
+
+# Feature X configuration
+FEATURE_X_ENABLED = True
+FEATURE_X_PARAMETER_1 = "value1"
+FEATURE_X_PARAMETER_2 = "value2"
