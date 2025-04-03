@@ -38,3 +38,18 @@ AUTHENTICATION_BACKENDS = [
 
 # Optional: If using a custom user model
 # AUTH_USER_MODEL = 'your_app_name.CustomUser'
+
+# Security settings
+SECURE_HSTS_SECONDS = 31536000  # Enable HSTS for 1 year
+SECURE_SSL_REDIRECT = True      # Redirect all HTTP traffic to HTTPS
+SESSION_COOKIE_SECURE = True    # Use secure cookies for sessions
+CSRF_COOKIE_SECURE = True       # Use secure cookies for CSRF tokens
+
+# Ensure SECRET_KEY is strong and secure
+import os
+from django.core.management.utils import get_random_secret_key
+
+SECRET_KEY = os.getenv('SECRET_KEY', 'your-very-strong-and-random-secret-key')  # Replace with a secure key
+from decouple import config
+
+SECRET_KEY = config('SECRET_KEY', default='your-very-strong-and-random-secret-key')
