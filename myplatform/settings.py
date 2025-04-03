@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dqngi%9+4%=3t2-g-id*x#&04^&qmw8n#uy*gzo&!@f(qnytwi'
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-dqngi%9+4%=3t2-g-id*x#&04^&qmw8n#uy*gzo&!@f(qnytwi')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -152,12 +153,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Email backend configuration
 if not DEBUG:  # Use SMTP backend in production
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = 'habrovan14@gmail.com'  # Replace with your email
-    EMAIL_HOST_PASSWORD = 'nmim szaf comz eshh'  # Replace with your app password
-    DEFAULT_FROM_EMAIL = 'habrovan14@gmail.com'
+    EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+    EMAIL_PORT = config('EMAIL_PORT', cast=int, default=587)
+    EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=True)
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='your-email@example.com')
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='your-email-password')
+    DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='your-email@example.com')
 else:  # Use console backend in development
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -165,7 +166,7 @@ else:  # Use console backend in development
 PASSWORD_RESET_TIMEOUT = 3600
 
 SITE_ID = 1  # Set the ID of the current site
-DEFAULT_FROM_EMAIL = 'habrovan14@gmail.com'  # Ensure this is set
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='your-email@example.com')
 SITE_URL = 'http://127.0.0.1:8000'  # Update with your domain in production
 
 
